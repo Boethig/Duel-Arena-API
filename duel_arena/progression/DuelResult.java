@@ -9,6 +9,10 @@ import scripts.dax_api.walker.utils.AccurateMouse;
 
 public class DuelResult {
 
+    public boolean isOpen() {
+        return DuelInterfaces.DUEL_RESULTS.isSubstantiated();
+    }
+
     public String getWinner() {
         RSInterface winner = DuelInterfaces.DUEL_RESULTS_WINNER.get();
         return winner != null ? winner.getText() : null;
