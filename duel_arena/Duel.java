@@ -59,7 +59,7 @@ public class Duel {
         return confirmation != null ? confirmation : (confirmation = new DuelConfirmation(DuelInterfaces.DUEL_CONFIRMATION.getMaster()));
     }
 
-    public static DuelResult getDuelReult() {
+    public static DuelResult getDuelResult() {
         return result != null ? result : (result = new DuelResult());
     }
 
