@@ -8,10 +8,7 @@ import org.tribot.api2007.types.RSObject;
 import org.tribot.api2007.types.RSPlayer;
 import scripts.boe_api.duel_arena.helpers.DuelHelper;
 import scripts.boe_api.duel_arena.models.DuelInterfaces;
-import scripts.boe_api.duel_arena.progression.DuelConfirmation;
-import scripts.boe_api.duel_arena.progression.DuelOptions;
-import scripts.boe_api.duel_arena.progression.DuelProgression;
-import scripts.boe_api.duel_arena.progression.DuelStake;
+import scripts.boe_api.duel_arena.progression.*;
 import scripts.dax_api.walker.utils.AccurateMouse;
 import scripts.dax_api.walker_engine.interaction_handling.InteractionHelper;
 
@@ -20,6 +17,7 @@ public class Duel {
     private static DuelOptions options;
     private static DuelStake stake;
     private static DuelConfirmation confirmation;
+    private static DuelResult result;
 
     public static boolean challenge(String username) {
         RSPlayer player = DuelHelper.getNearestPlayer(username);
@@ -61,15 +59,8 @@ public class Duel {
         return confirmation != null ? confirmation : (confirmation = new DuelConfirmation(DuelInterfaces.DUEL_CONFIRMATION.getMaster()));
     }
 
-    public static DuelProgression getCurrentStep() {
-        if (DuelInterfaces.DUEL_CONFIRMATION.isSubstantiated()) {
-            return confirmation != null ? confirmation : (confirmation = new DuelConfirmation(DuelInterfaces.DUEL_CONFIRMATION.getMaster()));
-        } else if (DuelInterfaces.DUEL_STAKE.isSubstantiated()) {
-            return stake != null ? stake : (stake = new DuelStake(DuelInterfaces.DUEL_STAKE.getMaster()));
-        } else if (DuelInterfaces.DUEL_OPTIONS.isSubstantiated()) {
-            return options != null ? options : (options = new DuelOptions(DuelInterfaces.DUEL_OPTIONS.getMaster()));
-        }
-        return null;
+    public static DuelResult getDuelReult() {
+        return result != null ? result : (result = new DuelResult());
     }
 
     public static boolean isDuelScreenOpen() {
